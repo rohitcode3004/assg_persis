@@ -1,0 +1,27 @@
+{% extends "accounts/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+  <div class="media">
+    <div class="media-body">
+      <legend class="border-bottom mb-4">Home Info</legend>
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+    </div>
+  </div>
+</div>
+<div class="content-section">
+  <div class="media">
+    <div class="media-body">
+      <legend class="border-bottom mb-4">Router Data</legend>
+      	<p>Are you sure you want to delete "{{router}}"?</p>
+      	<form action="{% url 'delete' router.id  %}" method="POST">
+      		{% csrf_token %}
+          
+      		<a class="btn btn-warning" href="{% url 'home' %}">Cancel</a>
+      		<input class="btn btn-danger" type="submit" name="Confirm">
+      	</form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

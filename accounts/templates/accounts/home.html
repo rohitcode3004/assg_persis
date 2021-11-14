@@ -1,0 +1,42 @@
+{% extends "accounts/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %} 
+  <div class="content-section">
+    <div class="media">
+      <div class="media-body">
+        <legend class="border-bottom mb-4">Home Info</legend>
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="media">
+      <div class="media-body">
+        <legend class="border-bottom mb-4">Router Data</legend>
+        <form action="{% url 'get_user' %}">
+            <table class="table table-sm">
+              <tr>
+                <th></th>
+                <th></th>
+                <th>SapId</th>
+                <th>Hostname</th>
+                <th>Loopback</th>
+                <th>Mac Address</th>
+              </tr>
+              {% for router in routers %}
+                <tr>
+                  <td><a href="{% url 'delete' router.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                  <td><a href="{% url 'update' router.id %}" class="btn btn-primary btn-sm">Update</a></td>
+                  <td>{{ router.sapid }}</td>
+                  <td>{{ router.hostname }}</td>
+                  <td>{{ router.loopback }}</td>
+                  <td>{{ router.mac_address}}</td>
+                </tr>
+              {% endfor %}
+            </table>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %} 
